@@ -1,19 +1,20 @@
 from flask import Flask, request, jsonify
-import address_validator  # or whatever the original file name is
+import address_validator
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Address Validator is running!"
+    return "Address Validator Running 🚀"
 
 @app.route("/validate", methods=["GET"])
 def validate():
     address = request.args.get("address")
+
     if not address:
-        return jsonify({"error": "No address provided"})
-    
-    result = address_validator.validate(address)  # adjust based on actual function
+        return jsonify({"error": "No address provided"}), 400
+
+    result = address_validator.validate(address)
     return jsonify({"result": result})
 
 if __name__ == "__main__":
